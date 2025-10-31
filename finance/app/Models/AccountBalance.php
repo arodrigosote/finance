@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class AccountBalance extends Model
+{
+    use HasFactory;
+
+    protected $guarded = [];
+
+    protected $casts = [
+        'balance_date' => 'date',
+        'closing_balance' => 'decimal:2',
+        'cleared_balance' => 'decimal:2',
+        'calculated_at' => 'datetime',
+        'snapshot' => 'array',
+    ];
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(FinancialAccount::class, 'financial_account_id');
+    }
+}
