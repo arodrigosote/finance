@@ -72,7 +72,7 @@ function TransactionRow({
     transaction,
     statusOptions,
     onStatusChange,
-    isUpdating,
+    isUpdating = false,
     statusLookup,
 }) {
     const status = statusMap[transaction.status] ?? null;
@@ -1060,10 +1060,6 @@ TransactionRow.propTypes = {
     onStatusChange: PropTypes.func.isRequired,
     isUpdating: PropTypes.bool,
     statusLookup: PropTypes.objectOf(statusOptionShape).isRequired,
-};
-
-TransactionRow.defaultProps = {
-    isUpdating: false,
 };
 
 TransactionTable.propTypes = {

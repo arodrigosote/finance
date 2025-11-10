@@ -62,8 +62,10 @@ export default function Index({ subscriptions = [], catalogs = {}, meta = {} }) 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
-        form.defaults(defaultFormData);
-    }, [form, defaultFormData]);
+        form.setDefaults(defaultFormData);
+        form.setData(defaultFormData);
+        form.clearErrors();
+    }, [defaultFormData]);
 
     const resetForm = () => {
         form.reset();
@@ -121,40 +123,40 @@ export default function Index({ subscriptions = [], catalogs = {}, meta = {} }) 
     const submit = (event) => {
         event.preventDefault();
 
-        form
-            .transform((data) => ({
-                ...data,
-                amount: data.amount === '' ? null : Number(data.amount),
-                interval: data.interval === '' ? 1 : Number(data.interval),
-                transfer_account_id:
-                    data.type === 'transfer'
-                        ? data.transfer_account_id === ''
-                            ? null
-                            : Number(data.transfer_account_id)
-                        : null,
-                category_id:
-                    data.type === 'transfer'
+        form.transform((data) => ({
+            ...data,
+            amount: data.amount === '' ? null : Number(data.amount),
+            interval: data.interval === '' ? 1 : Number(data.interval),
+            transfer_account_id:
+                data.type === 'transfer'
+                    ? data.transfer_account_id === ''
                         ? null
-                        : data.category_id === ''
-                            ? null
-                            : Number(data.category_id),
-                merchant_id: data.merchant_id === '' ? null : Number(data.merchant_id),
-                financial_account_id:
-                    data.financial_account_id === ''
+                        : Number(data.transfer_account_id)
+                    : null,
+            category_id:
+                data.type === 'transfer'
+                    ? null
+                    : data.category_id === ''
                         ? null
-                        : Number(data.financial_account_id),
-                auto_commit: data.auto_commit ? 1 : 0,
-                custom_schedule: null,
-            }))
-            .post(route('admin.subscriptions.store'), {
-                preserveScroll: true,
-                onSuccess: () => {
-                    closeModal();
-                },
-                onFinish: () => {
-                    form.transform((data) => data);
-                },
-            });
+                        : Number(data.category_id),
+            merchant_id: data.merchant_id === '' ? null : Number(data.merchant_id),
+            financial_account_id:
+                data.financial_account_id === ''
+                    ? null
+                    : Number(data.financial_account_id),
+            auto_commit: data.auto_commit ? 1 : 0,
+            custom_schedule: null,
+        }));
+
+        form.post(route('admin.subscriptions.store'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                closeModal();
+            },
+            onFinish: () => {
+                form.transform((data) => data);
+            },
+        });
     };
 
     return (

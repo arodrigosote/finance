@@ -1,5 +1,11 @@
-import { Dialog, Transition } from '@headlessui/react';
+import {
+    Dialog,
+    DialogPanel,
+    Transition,
+    TransitionChild,
+} from '@headlessui/react';
 import { Link, usePage } from '@inertiajs/react';
+import PropTypes from 'prop-types';
 import { Fragment, useMemo, useState } from 'react';
 
 const clsx = (...classes) => classes.filter(Boolean).join(' ');
@@ -67,15 +73,6 @@ const TagIcon = (props) => (
     </svg>
 );
 
-const CogIcon = (props) => (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" {...props}>
-        <path
-            d="M12 9.75A2.25 2.25 0 1 0 14.25 12 2.25 2.25 0 0 0 12 9.75zm0-4.5a.75.75 0 0 1 .68.44l.51 1.14 1.25.21a.75.75 0 0 1 .63.63l.21 1.25 1.14.51a.75.75 0 0 1 .44.68.75.75 0 0 1-.44.68l-1.14.51-.21 1.25a.75.75 0 0 1-.63.63l-1.25.21-.51 1.14a.75.75 0 0 1-.68.44.75.75 0 0 1-.68-.44l-.51-1.14-1.25-.21a.75.75 0 0 1-.63-.63l-.21-1.25-1.14-.51a.75.75 0 0 1-.44-.68.75.75 0 0 1 .44-.68l1.14-.51.21-1.25a.75.75 0 0 1 .63-.63l1.25-.21.51-1.14A.75.75 0 0 1 12 5.25z"
-            fill="currentColor"
-        />
-    </svg>
-);
-
 const defaultNavigationSeed = (ensureRoute) => [
     {
         name: 'Resumen',
@@ -112,13 +109,6 @@ const defaultNavigationSeed = (ensureRoute) => [
         routeName: 'admin.categories.index',
         icon: TagIcon,
     },
-    {
-        name: 'Configuración',
-        description: 'Preferencias del hogar y sistema',
-        href: ensureRoute('admin.settings', '/admin/settings'),
-        routeName: 'admin.settings',
-        icon: CogIcon,
-    },
 ];
 
 export default function AdminLayout({
@@ -132,14 +122,14 @@ export default function AdminLayout({
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const ensureRoute = (name, fallback) => {
-        if (typeof route === 'function') {
-            try {
-                if (route().has && route().has(name)) {
-                    return route(name);
-                }
-            } catch (error) {
-                // ignore fallback
-            }
+        if (typeof route !== 'function') {
+            return fallback;
+        }
+
+        const ziggy = route();
+
+        if (ziggy?.has?.(name)) {
+            return route(name);
         }
 
         return fallback;
@@ -155,11 +145,9 @@ export default function AdminLayout({
             return false;
         }
 
-        try {
-            return !!route().current(item.routeName);
-        } catch (error) {
-            return false;
-        }
+        const ziggy = route();
+
+        return Boolean(ziggy?.current?.(item.routeName));
     };
 
     const user = auth.user ?? null;
@@ -174,13 +162,13 @@ export default function AdminLayout({
 
     return (
         <div className="min-h-dvh bg-slate-950 text-slate-100 md:grid md:grid-cols-[280px,1fr]">
-            <Transition.Root show={mobileMenuOpen} as={Fragment}>
+            <Transition show={mobileMenuOpen} as={Fragment}>
                 <Dialog
                     as="div"
                     className="relative z-50 md:hidden"
                     onClose={setMobileMenuOpen}
                 >
-                    <Transition.Child
+                    <TransitionChild
                         as={Fragment}
                         enter="transition-opacity ease-out duration-200"
                         enterFrom="opacity-0"
@@ -190,10 +178,10 @@ export default function AdminLayout({
                         leaveTo="opacity-0"
                     >
                         <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" />
-                    </Transition.Child>
+                    </TransitionChild>
 
                     <div className="fixed inset-0 flex justify-end">
-                        <Transition.Child
+                        <TransitionChild
                             as={Fragment}
                             enter="transform transition ease-out duration-200"
                             enterFrom="translate-x-full"
@@ -202,7 +190,7 @@ export default function AdminLayout({
                             leaveFrom="translate-x-0"
                             leaveTo="translate-x-full"
                         >
-                            <Dialog.Panel className="flex h-full w-full max-w-xs flex-col border-l border-slate-800 bg-slate-900/95 backdrop-blur">
+                            <DialogPanel className="flex h-full w-full max-w-xs flex-col border-l border-slate-800 bg-slate-900/95 backdrop-blur">
                                 <div className="flex items-center justify-between px-4 py-4">
                                     <div>
                                         <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
@@ -265,11 +253,11 @@ export default function AdminLayout({
                                         );
                                     })}
                                 </nav>
-                            </Dialog.Panel>
-                        </Transition.Child>
+                            </DialogPanel>
+                        </TransitionChild>
                     </div>
                 </Dialog>
-            </Transition.Root>
+            </Transition>
 
             <aside className="hidden min-h-dvh border-r border-slate-900/70 bg-slate-950/80 backdrop-blur md:flex md:flex-col">
                 <div className="flex items-center gap-3 border-b border-slate-900 px-6 py-6">
@@ -282,7 +270,7 @@ export default function AdminLayout({
                                 FinBalance
                             </span>
                             <span className="text-xs text-slate-400">
-                                Control de pareja
+                                Creado por Rodrigo Sotelo
                             </span>
                         </div>
                     </Link>
@@ -436,3 +424,19 @@ export default function AdminLayout({
         </div>
     );
 }
+
+const navigationItemPropType = PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    href: PropTypes.string.isRequired,
+    routeName: PropTypes.string,
+    icon: PropTypes.elementType,
+});
+
+AdminLayout.propTypes = {
+    title: PropTypes.string,
+    description: PropTypes.node,
+    actions: PropTypes.node,
+    navigation: PropTypes.arrayOf(navigationItemPropType),
+    children: PropTypes.node.isRequired,
+};

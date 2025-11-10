@@ -97,8 +97,8 @@ trait InteractsWithHousehold
                 'status' => 'active',
                 'institution_name' => 'Finanzas Plus',
                 'display_color' => '#f97316',
-                'initial_balance' => -15000,
-                'current_balance' => -15000,
+                'initial_balance' => 0,
+                'current_balance' => 0,
                 'credit_limit' => 50000,
                 'is_primary' => false,
             ]);
