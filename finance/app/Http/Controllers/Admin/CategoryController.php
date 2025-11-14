@@ -8,8 +8,11 @@ use App\Http\Requests\Admin\StoreCategoryRequest;
 use App\Http\Requests\Admin\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Models\Household;
+use App\Models\Transaction;
+use App\Services\Transactions\TransactionBalanceManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,6 +20,10 @@ use Inertia\Response;
 class CategoryController extends Controller
 {
     use InteractsWithHousehold;
+
+    public function __construct(private readonly TransactionBalanceManager $balanceManager)
+    {
+    }
 
     public function index(Request $request): Response
     {
@@ -55,6 +62,60 @@ class CategoryController extends Controller
             ],
             'meta' => [
                 'total' => count($categories),
+            ],
+        ]);
+    }
+
+    public function show(Request $request, Category $category): Response
+    {
+        $household = $this->resolveHousehold($request);
+        $this->ensureCategoryContext($household, $category);
+
+        $category->load(['parent:id,name']);
+
+        $baseQuery = $category->transactions()
+            ->where('household_id', $household->id);
+
+        $aggregates = (clone $baseQuery)
+            ->selectRaw('count(*) as total')
+            ->selectRaw("sum(case when type = 'income' then amount else 0 end) as income_total")
+            ->selectRaw("sum(case when type = 'expense' then amount else 0 end) as expense_total")
+            ->selectRaw("sum(case when type = 'transfer' then amount else 0 end) as transfer_total")
+            ->selectRaw('max(booked_at) as last_activity')
+            ->first();
+
+        $transactions = (clone $baseQuery)
+            ->with(['account', 'transferAccount', 'primaryCategory', 'merchant', 'currency', 'tags'])
+            ->orderByDesc('booked_at')
+            ->orderByDesc('id')
+            ->paginate(15)
+            ->withQueryString()
+            ->through(fn (Transaction $transaction) => $this->transformTransaction($transaction));
+
+        $summary = [
+            'total' => (int) ($aggregates->total ?? 0),
+            'income_total' => (float) ($aggregates->income_total ?? 0),
+            'expense_total' => (float) ($aggregates->expense_total ?? 0),
+            'transfer_total' => (float) ($aggregates->transfer_total ?? 0),
+            'net_amount' => (float) (($aggregates->income_total ?? 0) - ($aggregates->expense_total ?? 0) - ($aggregates->transfer_total ?? 0)),
+            'average_amount' => 0.0,
+            'last_activity' => null,
+        ];
+
+        if ($summary['total'] > 0) {
+            $summary['average_amount'] = round($summary['net_amount'] / $summary['total'], 2);
+        }
+
+        if ($aggregates && $aggregates->last_activity) {
+            $summary['last_activity'] = Carbon::parse($aggregates->last_activity)->toIso8601String();
+        }
+
+        return Inertia::render('Admin/Categories/Show', [
+            'category' => $this->transformCategory($category),
+            'summary' => $summary,
+            'transactions' => $transactions,
+            'meta' => [
+                'currency' => $household->currency?->code ?? 'MXN',
             ],
         ]);
     }
@@ -235,6 +296,29 @@ class CategoryController extends Controller
             'rules' => $category->rules,
             'created_at' => optional($category->created_at)->toIso8601String(),
             'updated_at' => optional($category->updated_at)->toIso8601String(),
+        ];
+    }
+
+    private function transformTransaction(Transaction $transaction): array
+    {
+        $transaction->loadMissing(['account.currency', 'transferAccount', 'primaryCategory', 'merchant', 'tags']);
+
+        $signedAmount = $this->balanceManager->signedAmount($transaction);
+
+        return [
+            'id' => $transaction->id,
+            'description' => $transaction->description,
+            'type' => $transaction->type,
+            'status' => $transaction->status,
+            'amount' => $signedAmount,
+            'account' => $transaction->account?->name,
+            'transfer_account' => $transaction->transferAccount?->name,
+            'category' => $transaction->primaryCategory?->name,
+            'merchant' => $transaction->merchant?->name,
+            'currency' => $transaction->currency?->code ?? $transaction->account?->currency?->code,
+            'booked_at' => optional($transaction->booked_at)->toIso8601String(),
+            'posted_at' => optional($transaction->posted_at)->toIso8601String(),
+            'tags' => $transaction->tags->pluck('name')->all(),
         ];
     }
 }

@@ -38,7 +38,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('accounts', AccountController::class)
             ->only(['index', 'store', 'update', 'destroy']);
         Route::resource('categories', CategoryController::class)
-            ->only(['index', 'store', 'update', 'destroy']);
+            ->only(['index', 'show', 'store', 'update', 'destroy']);
     });
 
 Route::middleware('web')->group(__DIR__.'/auth.php');

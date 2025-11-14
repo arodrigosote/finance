@@ -35,6 +35,11 @@ export default function Login({ status, canResetPassword }) {
                     </div>
                 )}
 
+                <div className="rounded-2xl border border-slate-800 bg-slate-950/70 px-4 py-3 text-xs text-slate-300">
+                    <p className="font-semibold text-white">Proyecto de prueba</p>
+                    <p>Usa <span className="text-emerald-300">test@example.com</span> y contraseña <span className="text-emerald-300">password</span> para ingresar rápidamente.</p>
+                </div>
+
                 <form onSubmit={submit} className="space-y-6">
                     <div className="space-y-2">
                         <InputLabel
