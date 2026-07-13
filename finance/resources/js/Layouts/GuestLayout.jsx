@@ -12,15 +12,15 @@ export default function GuestLayout({
         'Ingresa tus credenciales para continuar gestionando tu hogar financiero.';
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100">
-            <div className="grid min-h-screen grid-cols-1 md:grid-cols-[420px,1fr]">
-                <aside className="hidden md:flex md:flex-col md:justify-between md:border-r md:border-slate-900 md:bg-gradient-to-b md:from-slate-950 md:via-slate-900 md:to-slate-950 md:p-10">
+        <div className="ios-guest-page glass-page min-h-dvh text-slate-100">
+            <div className="grid min-h-dvh grid-cols-1 md:grid-cols-[380px,1fr]">
+                <aside className="hidden md:flex md:flex-col md:justify-between md:border-r md:border-white/10 md:bg-white/[0.035] md:p-10 md:backdrop-blur-2xl">
                     <div>
-                        <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/20 text-lg font-semibold text-emerald-200">
+                        <span className="inline-flex h-12 w-12 items-center justify-center rounded-[1.4rem] border border-blue-300/30 bg-blue-500 text-lg font-semibold text-white shadow-lg shadow-blue-950/25">
                             ₲
                         </span>
                         <h1 className="mt-6 text-2xl font-semibold text-white">
-                            FinBalance Admin
+                            FinBalance
                         </h1>
                         <p className="mt-2 text-sm text-slate-400">
                             Gestiona tus finanzas en un entorno diseñado para claridad y control.
@@ -29,7 +29,7 @@ export default function GuestLayout({
 
                     <div className="mt-10 space-y-4">
                         {["Dashboard con métricas claras", "Suscripciones automáticas", "Distribución por cuentas"].map((feature) => (
-                            <div key={feature} className="rounded-xl border border-slate-800 bg-slate-900/40 px-4 py-3 text-sm text-slate-300">
+                            <div key={feature} className="glass-panel-soft rounded-3xl px-4 py-3 text-sm text-slate-300">
                                 {feature}
                             </div>
                         ))}
@@ -40,9 +40,10 @@ export default function GuestLayout({
                     </p>
                 </aside>
 
-                <main className="flex items-center justify-center px-6 py-12">
+                <main className="flex min-h-dvh items-center justify-center px-4 pb-[calc(var(--safe-bottom)+1.5rem)] pt-[calc(var(--safe-top)+1.5rem)] sm:px-6">
                     <div className="w-full max-w-md space-y-6">
                         <div className="space-y-2 text-center">
+                            <span className="ios-guest-mark md:hidden">₲</span>
                             <h2 className="text-2xl font-semibold text-white">
                                 {title}
                             </h2>
@@ -50,7 +51,7 @@ export default function GuestLayout({
                                 {resolvedSubtitle}
                             </p>
                         </div>
-                        <div className={clsx('rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-2xl shadow-black/40')}>{children}</div>
+                        <div className={clsx('glass-panel rounded-[2rem] p-5 sm:p-6')}>{children}</div>
                     </div>
                 </main>
             </div>

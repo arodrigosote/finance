@@ -167,7 +167,7 @@ export default function Index({ subscriptions = [], catalogs = {}, meta = {} }) 
                 <button
                     type="button"
                     onClick={openModal}
-                    className="inline-flex items-center justify-center rounded-xl border border-emerald-500/80 bg-emerald-500/20 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-400 hover:bg-emerald-500/30"
+                    className="inline-flex items-center justify-center bubble-button bubble-button-primary px-4 py-2 text-sm font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-400 hover:bg-emerald-500/30"
                 >
                     Nueva suscripción
                 </button>
@@ -175,7 +175,7 @@ export default function Index({ subscriptions = [], catalogs = {}, meta = {} }) 
         >
             <Head title="Suscripciones" />
 
-            <section className="rounded-2xl border border-slate-800 bg-slate-900/40">
+            <section className="glass-panel-soft rounded-[2rem]">
                 <header className="border-b border-slate-800 px-6 py-5">
                     <h2 className="text-base font-semibold text-white">Suscripciones programadas</h2>
                     <p className="mt-1 text-sm text-slate-400">
@@ -193,7 +193,7 @@ export default function Index({ subscriptions = [], catalogs = {}, meta = {} }) 
                             <button
                                 type="button"
                                 onClick={openModal}
-                                className="inline-flex items-center justify-center rounded-xl border border-emerald-500/70 bg-emerald-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-400 hover:bg-emerald-500/20"
+                                className="inline-flex items-center justify-center bubble-button bubble-button-primary px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-400 hover:bg-emerald-500/20"
                             >
                                 Programar suscripción
                             </button>
@@ -293,7 +293,7 @@ export default function Index({ subscriptions = [], catalogs = {}, meta = {} }) 
                                 leaveFrom="translate-y-0 opacity-100 scale-100"
                                 leaveTo="translate-y-6 opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-2xl shadow-black/60">
+                                <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden glass-panel rounded-[2rem] shadow-2xl shadow-black/60">
                                     <div className="flex items-start justify-between border-b border-slate-900 px-6 py-5">
                                         <div>
                                             <Dialog.Title className="text-lg font-semibold text-white">
@@ -306,7 +306,7 @@ export default function Index({ subscriptions = [], catalogs = {}, meta = {} }) 
                                         <button
                                             type="button"
                                             onClick={closeModal}
-                                            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-300 transition hover:border-slate-600 hover:text-white"
+                                            className="bubble-button h-10 min-h-0 w-10 px-0 text-slate-300 transition hover:border-slate-600 hover:text-white"
                                             aria-label="Cerrar"
                                         >
                                             <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">

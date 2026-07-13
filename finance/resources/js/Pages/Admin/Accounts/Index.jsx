@@ -81,7 +81,7 @@ function AccountComposerModal({
                             leaveFrom="translate-y-0 opacity-100"
                             leaveTo="translate-y-10 opacity-0"
                         >
-                            <Dialog.Panel className="w-full max-w-3xl rounded-2xl border border-slate-900 bg-slate-950/95 shadow-2xl">
+                            <Dialog.Panel className="w-full max-w-3xl glass-panel rounded-[2rem] shadow-2xl">
                                 <header className="flex items-start justify-between border-b border-slate-900 px-6 py-4">
                                     <div>
                                         <Dialog.Title className="text-base font-semibold text-white">
@@ -118,7 +118,7 @@ function AccountComposerModal({
                                             <button
                                                 type="button"
                                                 onClick={onClose}
-                                                className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
+                                                className="inline-flex items-center justify-center bubble-button px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
                                             >
                                                 Cancelar
                                             </button>
@@ -128,7 +128,7 @@ function AccountComposerModal({
                                                 <button
                                                     type="button"
                                                     onClick={onDelete}
-                                                    className="inline-flex items-center justify-center rounded-xl border border-rose-500/50 bg-rose-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-rose-200 transition hover:border-rose-400 hover:bg-rose-500/20"
+                                                    className="inline-flex items-center justify-center bubble-button bubble-button-danger px-4 py-2 text-sm font-semibold uppercase tracking-wide text-rose-200 transition hover:border-rose-400 hover:bg-rose-500/20"
                                                 >
                                                     Eliminar cuenta
                                                 </button>
@@ -168,7 +168,7 @@ function AccountCard({ account, typeLabels, statusLabels, onEdit, onDelete }) {
     const currencyCode = account.currency_code ?? 'MXN';
 
     return (
-        <article className="rounded-2xl border border-slate-800/80 bg-slate-950/60 p-5 shadow-inner shadow-black/30">
+        <article className="glass-panel-soft rounded-[2rem] p-5 shadow-inner shadow-black/30">
             <div className="flex items-start justify-between">
                 <div>
                     <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
@@ -251,7 +251,7 @@ function AccountCard({ account, typeLabels, statusLabels, onEdit, onDelete }) {
                 <button
                     type="button"
                     onClick={() => onEdit(account)}
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-200 transition hover:border-emerald-400 hover:text-white"
+                    className="inline-flex items-center gap-2 bubble-button px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-200 transition hover:border-emerald-400 hover:text-white"
                 >
                     <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
                         <path
@@ -268,7 +268,7 @@ function AccountCard({ account, typeLabels, statusLabels, onEdit, onDelete }) {
                 <button
                     type="button"
                     onClick={() => onDelete(account)}
-                    className="inline-flex items-center gap-2 rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-rose-200 transition hover:border-rose-400 hover:bg-rose-500/20"
+                    className="inline-flex items-center gap-2 bubble-button bubble-button-danger px-4 py-2 text-xs font-semibold uppercase tracking-wide text-rose-200 transition hover:border-rose-400 hover:bg-rose-500/20"
                 >
                     <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
                         <path
@@ -431,7 +431,7 @@ export default function AccountsIndex({ accounts, meta, catalogs }) {
                     <button
                         type="button"
                         onClick={openCreateComposer}
-                        className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-300"
+                        className="inline-flex items-center gap-2 bubble-button bubble-button-primary px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-300"
                     >
                         <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
                             <path
@@ -446,7 +446,7 @@ export default function AccountsIndex({ accounts, meta, catalogs }) {
                     </button>
                     <button
                         type="button"
-                        className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
+                        className="inline-flex items-center gap-2 bubble-button px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
                     >
                         Sincronizar ahora
                     </button>
@@ -455,7 +455,7 @@ export default function AccountsIndex({ accounts, meta, catalogs }) {
         >
             <Head title="Cuentas" />
 
-            <section className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5">
+            <section className="glass-panel-soft rounded-[2rem] p-5">
                 <header className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                     <div>
                         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
@@ -485,7 +485,7 @@ export default function AccountsIndex({ accounts, meta, catalogs }) {
                             />
                         ))
                     ) : (
-                        <div className="rounded-2xl border border-slate-800/60 bg-slate-900/60 p-6 text-center text-sm text-slate-400">
+                        <div className="glass-panel-soft rounded-[2rem] p-6 text-center text-sm text-slate-400">
                             No hay cuentas registradas todavía.
                         </div>
                     )}

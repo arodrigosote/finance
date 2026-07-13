@@ -58,7 +58,7 @@ export default function AccountForm({
                     </label>
                     <input
                         type="text"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.name}
                         onChange={(event) => setData('name', event.target.value)}
                         placeholder="Ej. Cuenta nómina"
@@ -74,7 +74,7 @@ export default function AccountForm({
                             Tipo
                         </label>
                         <select
-                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                            className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                             value={data.type}
                             onChange={(event) => setData('type', event.target.value)}
                             required
@@ -94,7 +94,7 @@ export default function AccountForm({
                             Estado
                         </label>
                         <select
-                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                            className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                             value={data.status}
                             onChange={(event) => setData('status', event.target.value)}
                             required
@@ -115,7 +115,7 @@ export default function AccountForm({
                         Moneda
                     </label>
                     <select
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.currency_id}
                         onChange={(event) => setData('currency_id', event.target.value)}
                         required
@@ -137,7 +137,7 @@ export default function AccountForm({
                     </label>
                     <input
                         type="text"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.institution_name}
                         onChange={(event) => setData('institution_name', event.target.value)}
                         placeholder="Banco o proveedor"
@@ -154,7 +154,7 @@ export default function AccountForm({
                         type="text"
                         inputMode="numeric"
                         maxLength={4}
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.account_number_last4}
                         onChange={(event) => setData('account_number_last4', event.target.value)}
                         placeholder="0000"
@@ -169,7 +169,7 @@ export default function AccountForm({
                     </label>
                     <input
                         type="text"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.display_color}
                         onChange={(event) => setData('display_color', event.target.value)}
                         placeholder="#0ea5e9"
@@ -189,7 +189,7 @@ export default function AccountForm({
                         type="number"
                         step="0.01"
                         inputMode="decimal"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.initial_balance}
                         onChange={(event) => setData('initial_balance', event.target.value)}
                         required
@@ -206,7 +206,7 @@ export default function AccountForm({
                         type="number"
                         step="0.01"
                         inputMode="decimal"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.current_balance}
                         onChange={(event) => setData('current_balance', event.target.value)}
                         required
@@ -224,7 +224,7 @@ export default function AccountForm({
                             type="number"
                             step="0.01"
                             inputMode="decimal"
-                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                            className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                             value={data.credit_limit}
                             onChange={(event) => setData('credit_limit', event.target.value)}
                             placeholder="Límite máximo disponible"
@@ -242,7 +242,7 @@ export default function AccountForm({
                         type="number"
                         step="0.01"
                         inputMode="decimal"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.interest_rate}
                         onChange={(event) => setData('interest_rate', event.target.value)}
                         placeholder="Ej. 12.5"
@@ -260,7 +260,7 @@ export default function AccountForm({
                     </label>
                     <input
                         type="date"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.opened_on}
                         onChange={(event) => setData('opened_on', event.target.value)}
                     />
@@ -274,7 +274,7 @@ export default function AccountForm({
                     </label>
                     <input
                         type="date"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.closed_on}
                         onChange={(event) => setData('closed_on', event.target.value)}
                         disabled={data.status !== 'closed'}
@@ -285,7 +285,7 @@ export default function AccountForm({
                 </div>
             </section>
 
-            <section className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3 text-sm text-slate-300">
+            <section className="flex items-center justify-between glass-panel-soft rounded-2xl px-4 py-3 text-sm text-slate-300">
                 <label className="inline-flex items-center gap-2">
                     <input
                         type="checkbox"

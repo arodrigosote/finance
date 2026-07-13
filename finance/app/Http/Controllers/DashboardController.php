@@ -17,9 +17,7 @@ class DashboardController extends Controller
 {
     use InteractsWithHousehold;
 
-    public function __construct(private readonly TransactionBalanceManager $balanceManager)
-    {
-    }
+    public function __construct(private readonly TransactionBalanceManager $balanceManager) {}
 
     public function __invoke(Request $request): Response
     {
@@ -69,6 +67,7 @@ class DashboardController extends Controller
             $endOfMonth,
             $monthlyOutflow,
         );
+        $monthlyCashFlow = $this->monthlyCashFlow($household->id, $now);
 
         $upcomingTransactions = $this->upcomingTransactions($household->id, $now);
         $recentTransactions = $this->recentTransactions($household->id);
@@ -85,10 +84,41 @@ class DashboardController extends Controller
                 'outflowTrend' => round($outflowTrend, 2),
             ],
             'spendingByCategory' => $spendingByCategory,
+            'monthlyCashFlow' => $monthlyCashFlow,
             'upcomingTransactions' => $upcomingTransactions,
             'recentTransactions' => $recentTransactions,
             'accountSnapshots' => $accountSnapshots,
         ]);
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    private function monthlyCashFlow(int $householdId, Carbon $referenceDate): array
+    {
+        $start = $referenceDate->copy()->startOfMonth()->subMonths(5);
+        $end = $referenceDate->copy()->endOfMonth();
+
+        $transactions = Transaction::query()
+            ->where('household_id', $householdId)
+            ->whereIn('type', ['income', 'expense'])
+            ->whereBetween('booked_at', [$start, $end])
+            ->get(['type', 'amount', 'booked_at'])
+            ->groupBy(fn (Transaction $transaction) => $transaction->booked_at?->format('Y-m'));
+
+        return collect(range(5, 0))
+            ->map(function (int $monthsAgo) use ($referenceDate, $transactions) {
+                $month = $referenceDate->copy()->startOfMonth()->subMonths($monthsAgo);
+                $items = $transactions->get($month->format('Y-m'), collect());
+
+                return [
+                    'month' => $month->locale('es')->translatedFormat('M'),
+                    'income' => round((float) $items->where('type', 'income')->sum('amount'), 2),
+                    'expense' => round((float) $items->where('type', 'expense')->sum('amount'), 2),
+                ];
+            })
+            ->values()
+            ->all();
     }
 
     /**

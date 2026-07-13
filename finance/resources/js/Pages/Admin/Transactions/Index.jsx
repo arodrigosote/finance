@@ -79,7 +79,7 @@ function TransactionRow({
     const statusLabel = statusLookup[transaction.status]?.label ?? status?.label ?? transaction.status;
 
     return (
-        <article className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-4 shadow-inner shadow-slate-950/40">
+        <article className="glass-panel-soft rounded-[2rem] p-4 shadow-inner shadow-slate-950/40">
             <div className="flex items-start justify-between gap-3">
                 <div className="flex flex-col">
                     <span className="text-sm font-semibold text-white">
@@ -127,7 +127,7 @@ function TransactionRow({
                 <label className="flex items-center gap-2 text-xs text-slate-400">
                     <span>Estado:</span>
                     <select
-                        className="rounded-lg border border-slate-800 bg-slate-900 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-slate-100 focus:border-emerald-400 focus:outline-none"
+                        className="mobile-field px-2 py-1 text-xs font-semibold uppercase tracking-wide text-slate-100 focus:border-emerald-400 focus:outline-none"
                         value={transaction.status}
                         onChange={(event) => onStatusChange(transaction.id, event.target.value)}
                         disabled={isUpdating}
@@ -164,7 +164,7 @@ function TransactionTable({
     statusLookup,
 }) {
     return (
-        <div className="hidden overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 md:block">
+        <div className="hidden overflow-hidden glass-panel-soft rounded-[2rem] md:block">
             <table className="min-w-full divide-y divide-slate-800 text-left text-sm text-slate-200">
                 <thead className="bg-slate-900/80 text-xs uppercase text-slate-400">
                     <tr>
@@ -254,7 +254,7 @@ function TransactionTable({
                                 </td>
                                 <td className="px-6 py-4 text-right">
                                     <select
-                                        className="rounded-lg border border-slate-800 bg-slate-900 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-slate-100 focus:border-emerald-400 focus:outline-none"
+                                        className="mobile-field px-2 py-1 text-xs font-semibold uppercase tracking-wide text-slate-100 focus:border-emerald-400 focus:outline-none"
                                         value={transaction.status}
                                         onChange={(event) => onStatusChange(transaction.id, event.target.value)}
                                         disabled={updatingId === transaction.id}
@@ -340,7 +340,7 @@ function TransactionComposerSheet({ open, onClose, form, catalogs, meta, onSubmi
                                             <button
                                                 type="button"
                                                 onClick={onClose}
-                                                className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
+                                                className="inline-flex items-center justify-center bubble-button px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
                                             >
                                                 Cancelar
                                             </button>
@@ -660,7 +660,7 @@ export default function TransactionsIndex({
                             </svg>
                             Nuevo movimiento
                         </button>
-                        <div className="inline-flex items-center rounded-xl border border-slate-700 bg-slate-900 text-slate-300">
+                        <div className="inline-flex items-center bubble-button text-slate-300">
                             <button
                                 type="button"
                                 onClick={() => setViewMode('detail')}
@@ -708,7 +708,7 @@ export default function TransactionsIndex({
                     <button
                         type="button"
                         onClick={() => setFiltersOpen((state) => !state)}
-                        className="inline-flex h-10 items-center justify-center rounded-xl border border-slate-700 bg-slate-900 px-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500"
+                        className="inline-flex h-10 items-center justify-center bubble-button px-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500"
                     >
                         Filtros
                     </button>
@@ -724,13 +724,13 @@ export default function TransactionsIndex({
             </section>
 
             <section className="space-y-4">
-                <div className="flex flex-col gap-3 rounded-2xl border border-slate-800/60 bg-slate-900/60 p-4">
+                <div className="flex flex-col gap-3 glass-panel-soft rounded-[2rem] p-4">
                     <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                         <div className="flex items-center gap-2">
                             <button
                                 type="button"
                                 onClick={() => setFiltersOpen((state) => !state)}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-200 transition hover:border-slate-600 hover:text-white"
+                                className="bubble-button h-10 min-h-0 w-10 px-0 text-slate-200"
                                 aria-expanded={filtersOpen}
                                 aria-controls="filters-panel"
                             >
@@ -748,7 +748,7 @@ export default function TransactionsIndex({
                                     />
                                 </svg>
                             </button>
-                            <div className="flex flex-1 items-center gap-2 rounded-xl border border-slate-800 bg-slate-900 px-3">
+                            <div className="flex flex-1 items-center gap-2 mobile-field px-3">
                                 <svg
                                     viewBox="0 0 24 24"
                                     className="h-5 w-5 text-slate-500"
@@ -779,7 +779,7 @@ export default function TransactionsIndex({
                             <button
                                 type="button"
                                 onClick={() => setViewMode((mode) => (mode === 'detail' ? 'table' : 'detail'))}
-                                className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-600 md:hidden"
+                                className="bubble-button px-3 py-2 text-xs uppercase tracking-wide text-slate-300 md:hidden"
                             >
                                 {viewMode === 'detail' ? (
                                     <>
@@ -812,7 +812,7 @@ export default function TransactionsIndex({
                             <button
                                 type="button"
                                 onClick={openCreateSheet}
-                                className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-300 md:hidden"
+                                className="inline-flex items-center gap-2 bubble-button bubble-button-primary px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-300 md:hidden"
                             >
                                 <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
                                     <path
@@ -827,7 +827,7 @@ export default function TransactionsIndex({
                             </button>
                             <button
                                 type="button"
-                                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
+                                className="inline-flex items-center gap-2 bubble-button px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
                             >
                                 <span className="h-2 w-2 rounded-full bg-emerald-400" aria-hidden />
                                 <span>Conciliar pendientes</span>
@@ -861,7 +861,7 @@ export default function TransactionsIndex({
                                     Cuenta
                                 </p>
                                 <select
-                                    className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                                    className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                                     value={filterForm.account ?? ''}
                                     onChange={(event) =>
                                         handleFilterChange('account', event.target.value)
@@ -880,7 +880,7 @@ export default function TransactionsIndex({
                                     Categoría
                                 </p>
                                 <select
-                                    className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                                    className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                                     value={filterForm.category ?? ''}
                                     onChange={(event) =>
                                         handleFilterChange('category', event.target.value)
@@ -899,7 +899,7 @@ export default function TransactionsIndex({
                                     Estado
                                 </p>
                                 <select
-                                    className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                                    className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                                     value={filterForm.status ?? ''}
                                     onChange={(event) =>
                                         handleFilterChange('status', event.target.value)
@@ -920,7 +920,7 @@ export default function TransactionsIndex({
                                 <div className="flex gap-2">
                                     <input
                                         type="date"
-                                        className="flex-1 rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                                        className="flex-1 mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                                         value={filterForm.from ?? ''}
                                         onChange={(event) =>
                                             handleFilterChange('from', event.target.value)
@@ -928,7 +928,7 @@ export default function TransactionsIndex({
                                     />
                                     <input
                                         type="date"
-                                        className="flex-1 rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                                        className="flex-1 mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                                         value={filterForm.to ?? ''}
                                         onChange={(event) =>
                                             handleFilterChange('to', event.target.value)

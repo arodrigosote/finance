@@ -45,7 +45,7 @@ function CategoryComposerModal({
                             leaveFrom="translate-y-0 opacity-100"
                             leaveTo="translate-y-10 opacity-0"
                         >
-                            <Dialog.Panel className="w-full max-w-3xl rounded-2xl border border-slate-900 bg-slate-950/95 shadow-2xl">
+                            <Dialog.Panel className="w-full max-w-3xl glass-panel rounded-[2rem] shadow-2xl">
                                 <header className="flex items-start justify-between border-b border-slate-900 px-6 py-4">
                                     <div>
                                         <Dialog.Title className="text-base font-semibold text-white">
@@ -83,7 +83,7 @@ function CategoryComposerModal({
                                             <button
                                                 type="button"
                                                 onClick={onClose}
-                                                className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
+                                                className="inline-flex items-center justify-center bubble-button px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
                                             >
                                                 Cancelar
                                             </button>
@@ -93,7 +93,7 @@ function CategoryComposerModal({
                                                 <button
                                                     type="button"
                                                     onClick={onDelete}
-                                                    className="inline-flex items-center justify-center rounded-xl border border-rose-500/50 bg-rose-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-rose-200 transition hover:border-rose-400 hover:bg-rose-500/20"
+                                                    className="inline-flex items-center justify-center bubble-button bubble-button-danger px-4 py-2 text-sm font-semibold uppercase tracking-wide text-rose-200 transition hover:border-rose-400 hover:bg-rose-500/20"
                                                 >
                                                     Eliminar categoría
                                                 </button>
@@ -224,7 +224,7 @@ CategoryItem.propTypes = {
 
 function CategorySection({ title, description, categories, onEdit, onDelete }) {
     return (
-        <section className="space-y-4 rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5">
+        <section className="space-y-4 glass-panel-soft rounded-[2rem] p-5">
             <header>
                 <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
                     {title}
@@ -381,7 +381,7 @@ export default function CategoriesIndex({ categories, catalogs, meta }) {
                 <button
                     type="button"
                     onClick={openCreateComposer}
-                    className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-300"
+                    className="inline-flex items-center gap-2 bubble-button bubble-button-primary px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-200 transition hover:border-emerald-300"
                 >
                     <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
                         <path
@@ -398,7 +398,7 @@ export default function CategoriesIndex({ categories, catalogs, meta }) {
         >
             <Head title="Categorías" />
 
-            <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5 md:flex-row md:items-center md:justify-between">
+            <div className="mb-6 flex flex-col gap-3 glass-panel-soft rounded-[2rem] p-5 md:flex-row md:items-center md:justify-between">
                 <div>
                     <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">
                         Total de categorías

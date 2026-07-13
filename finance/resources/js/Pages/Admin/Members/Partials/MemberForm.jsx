@@ -41,7 +41,7 @@ export default function MemberForm({
                     </label>
                     <input
                         type="text"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.name}
                         onChange={(event) => setData('name', event.target.value)}
                         placeholder="Ej. Ana Pérez"
@@ -77,7 +77,7 @@ export default function MemberForm({
                         Rol dentro del hogar
                     </label>
                     <select
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.role}
                         onChange={(event) => setData('role', event.target.value)}
                         required
@@ -100,7 +100,7 @@ export default function MemberForm({
                         Estado de la invitación
                     </label>
                     <select
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.invitation_status}
                         onChange={(event) => setData('invitation_status', event.target.value)}
                         required

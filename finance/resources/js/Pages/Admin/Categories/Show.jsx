@@ -116,7 +116,7 @@ function TransactionItem({ transaction, currencyCode }) {
         };
 
     return (
-        <article className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-4">
+        <article className="glass-panel-soft rounded-[2rem] p-4">
             <div className="flex items-start justify-between gap-3">
                 <div>
                     <h3 className="text-sm font-semibold text-white">
@@ -195,7 +195,7 @@ export default function CategoryShow({ category, summary, transactions, meta }) 
             actions={(
                 <Link
                     href={route('admin.categories.index')}
-                    className="inline-flex items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-200 transition hover:border-slate-500"
+                    className="inline-flex items-center bubble-button px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-200 transition hover:border-slate-500"
                     preserveScroll
                 >
                     Volver a categorías
@@ -205,7 +205,7 @@ export default function CategoryShow({ category, summary, transactions, meta }) 
             <Head title={`Categoría · ${category.name}`} />
 
             <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                <article className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5">
+                <article className="glass-panel-soft rounded-[2rem] p-5">
                     <div className="flex items-start justify-between gap-3">
                         <div>
                             <h1 className="text-xl font-semibold text-white">{category.name}</h1>

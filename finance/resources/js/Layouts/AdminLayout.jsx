@@ -5,6 +5,7 @@ import {
     TransitionChild,
 } from '@headlessui/react';
 import { Link, usePage } from '@inertiajs/react';
+import ThemeToggle from '@/Components/ThemeToggle';
 import PropTypes from 'prop-types';
 import { Fragment, useMemo, useState } from 'react';
 
@@ -50,6 +51,19 @@ const WalletIcon = (props) => (
     </svg>
 );
 
+const SavingsIcon = (props) => (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" {...props}>
+        <path
+            d="M7.25 10.25A4.75 4.75 0 0 1 12 5.5h2.5A5.75 5.75 0 0 1 20.25 11.25v1.5A5.75 5.75 0 0 1 14.5 18.5h-6A4.75 4.75 0 0 1 3.75 13.75v-1.5a2 2 0 0 0-1.25-1.85.75.75 0 0 1 .42-1.43 3.48 3.48 0 0 1 2.17 1.28z"
+            fill="currentColor"
+        />
+        <path
+            d="M9.75 3.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5zm7.5 7a.875.875 0 1 0 0-1.75.875.875 0 0 0 0 1.75zM9 8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 0 1.5h-3.5A.75.75 0 0 1 9 8.25z"
+            fill="currentColor"
+        />
+    </svg>
+);
+
 const RepeatIcon = (props) => (
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" {...props}>
         <path
@@ -83,6 +97,7 @@ const defaultNavigationSeed = (ensureRoute) => [
     },
     {
         name: 'Transacciones',
+        mobileName: 'Movimientos',
         description: 'Movimientos y conciliaciones',
         href: ensureRoute('admin.transactions.index', '/admin/transactions'),
         routeName: 'admin.transactions.index',
@@ -90,10 +105,18 @@ const defaultNavigationSeed = (ensureRoute) => [
     },
     {
         name: 'Suscripciones',
+        mobileName: 'Pagos',
         description: 'Automatiza cargos recurrentes',
         href: ensureRoute('admin.subscriptions.index', '/admin/subscriptions'),
         routeName: 'admin.subscriptions.index',
         icon: RepeatIcon,
+    },
+    {
+        name: 'Ahorro',
+        description: 'Metas, cuentas y cripto',
+        href: ensureRoute('admin.savings.index', '/admin/savings'),
+        routeName: 'admin.savings.index',
+        icon: SavingsIcon,
     },
     {
         name: 'Cuentas',
@@ -139,6 +162,7 @@ export default function AdminLayout({
         () => navigation ?? defaultNavigationSeed(ensureRoute),
         [navigation],
     );
+    const mobileItems = items.slice(0, 5);
 
     const resolveIsActive = (item) => {
         if (!item?.routeName || typeof route !== 'function') {
@@ -161,7 +185,8 @@ export default function AdminLayout({
     }, [user]);
 
     return (
-        <div className="min-h-dvh bg-slate-950 text-slate-100 md:grid md:grid-cols-[280px,1fr]">
+        <div className="glass-page min-h-dvh text-slate-100 md:grid md:grid-cols-[280px,1fr]">
+            <a href="#main-content" className="skip-link">Ir al contenido</a>
             <Transition show={mobileMenuOpen} as={Fragment}>
                 <Dialog
                     as="div"
@@ -180,7 +205,7 @@ export default function AdminLayout({
                         <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" />
                     </TransitionChild>
 
-                    <div className="fixed inset-0 flex justify-end">
+                    <div className="safari-fixed-viewport fixed inset-0 flex justify-end">
                         <TransitionChild
                             as={Fragment}
                             enter="transform transition ease-out duration-200"
@@ -190,8 +215,8 @@ export default function AdminLayout({
                             leaveFrom="translate-x-0"
                             leaveTo="translate-x-full"
                         >
-                            <DialogPanel className="flex h-full w-full max-w-xs flex-col border-l border-slate-800 bg-slate-900/95 backdrop-blur">
-                                <div className="flex items-center justify-between px-4 py-4">
+                            <DialogPanel className="glass-panel flex h-full w-full max-w-xs flex-col border-l border-white/10 bg-slate-950/80">
+                                <div className="flex items-center justify-between px-4 pb-4 pt-[calc(var(--safe-top)+1rem)]">
                                     <div>
                                         <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                                             Menú
@@ -203,7 +228,7 @@ export default function AdminLayout({
                                     <button
                                         type="button"
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-slate-200 shadow-sm transition hover:border-slate-500 hover:text-white"
+                                        className="bubble-button h-10 min-h-0 w-10 px-0"
                                         aria-label="Cerrar navegación"
                                     >
                                         <svg
@@ -232,13 +257,13 @@ export default function AdminLayout({
                                                 href={item.href}
                                                 onClick={() => setMobileMenuOpen(false)}
                                                 className={clsx(
-                                                    'group flex items-center gap-3 rounded-xl border px-3 py-3 transition-colors',
+                                                    'group flex items-center gap-3 rounded-3xl border px-3 py-3 backdrop-blur-xl transition-colors',
                                                     isActive
-                                                        ? 'border-slate-200/40 bg-slate-800/70 text-white'
-                                                        : 'border-transparent bg-slate-900 text-slate-300 hover:border-slate-700 hover:bg-slate-800/60 hover:text-white',
+                                                        ? 'border-blue-400/40 bg-blue-500/15 text-white'
+                                                        : 'border-white/5 bg-white/[0.045] text-slate-300 hover:border-white/10 hover:bg-white/[0.08] hover:text-white',
                                                 )}
                                             >
-                                                <span className={clsx('flex h-10 w-10 items-center justify-center rounded-lg text-base', isActive ? 'bg-slate-800 text-white' : 'bg-slate-800/50 text-slate-200')}>
+                                                <span className={clsx('flex h-10 w-10 items-center justify-center rounded-2xl text-base', isActive ? 'bg-blue-500/20 text-blue-200' : 'bg-white/[0.06] text-slate-200')}>
                                                     <Icon className="h-5 w-5" />
                                                 </span>
                                                 <span className="flex flex-col">
@@ -259,10 +284,10 @@ export default function AdminLayout({
                 </Dialog>
             </Transition>
 
-            <aside className="hidden min-h-dvh border-r border-slate-900/70 bg-slate-950/80 backdrop-blur md:flex md:flex-col">
-                <div className="flex items-center gap-3 border-b border-slate-900 px-6 py-6">
+            <aside className="ios-sidebar hidden min-h-dvh border-r border-white/10 bg-slate-950/60 backdrop-blur-2xl md:flex md:flex-col">
+                <div className="flex items-center gap-3 border-b border-white/10 px-6 py-6">
                     <Link href={ensureRoute('dashboard', '/dashboard')} className="flex items-center gap-3">
-                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-base font-semibold text-emerald-950">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-blue-300/30 bg-blue-500 text-base font-semibold text-white shadow-lg shadow-blue-950/30">
                             ₲
                         </span>
                         <div className="flex flex-col">
@@ -285,13 +310,13 @@ export default function AdminLayout({
                                 key={item.name}
                                 href={item.href}
                                 className={clsx(
-                                    'group flex items-center gap-3 rounded-lg px-3 py-2 transition-colors',
+                                    'group flex items-center gap-3 rounded-2xl px-3 py-2 transition-colors',
                                     isActive
-                                        ? 'bg-slate-800 text-white'
-                                        : 'text-slate-300 hover:bg-slate-900 hover:text-white',
+                                        ? 'bg-white/10 text-white'
+                                        : 'text-slate-300 hover:bg-white/[0.06] hover:text-white',
                                 )}
                             >
-                                <span className={clsx('flex h-9 w-9 items-center justify-center rounded-lg text-sm', isActive ? 'bg-slate-700 text-white' : 'bg-slate-800/60 text-slate-300 group-hover:bg-slate-800 group-hover:text-white')}>
+                                <span className={clsx('flex h-9 w-9 items-center justify-center rounded-2xl text-sm', isActive ? 'bg-blue-500/20 text-blue-200' : 'bg-white/[0.06] text-slate-300 group-hover:bg-white/10 group-hover:text-white')}>
                                     <Icon className="h-5 w-5" />
                                 </span>
                                 <span className="flex flex-col">
@@ -306,9 +331,9 @@ export default function AdminLayout({
                         );
                     })}
                 </nav>
-                <div className="border-t border-slate-900 px-6 py-5">
+                <div className="border-t border-white/10 px-6 py-5">
                     <div className="flex items-center gap-3">
-                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-sm font-semibold text-white">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-sm font-semibold text-white">
                             {userInitials}
                         </span>
                         <div className="flex flex-col">
@@ -324,13 +349,13 @@ export default function AdminLayout({
             </aside>
 
             <div className="relative flex min-h-dvh flex-col">
-                <header className="sticky top-0 z-30 border-b border-slate-900/70 bg-slate-950/80 backdrop-blur">
-                    <div className="flex items-center justify-between px-4 py-3 md:px-8">
+                <header className="ios-app-header sticky top-0 z-30 border-b border-white/10 bg-slate-950/55 backdrop-blur-2xl">
+                    <div className="flex items-center justify-between px-4 pb-3 pt-[calc(var(--safe-top)+0.75rem)] md:px-8 md:pt-3">
                         <div className="flex items-center gap-3">
                             <button
                                 type="button"
                                 onClick={() => setMobileMenuOpen(true)}
-                                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-200 shadow-sm transition hover:border-slate-600 hover:text-white md:hidden"
+                                className="bubble-button h-11 min-h-0 w-11 px-0 md:hidden"
                                 aria-label="Abrir navegación"
                             >
                                 <svg
@@ -348,8 +373,8 @@ export default function AdminLayout({
                                 </svg>
                             </button>
                             <div>
-                                <p className="text-xs font-medium uppercase tracking-wide text-emerald-400">
-                                    Admin
+                                <p className="ios-app-brand text-xs font-medium uppercase tracking-wide text-blue-400">
+                                    FinBalance
                                 </p>
                                 <h1 className="text-lg font-semibold text-white">
                                     {title}
@@ -357,6 +382,7 @@ export default function AdminLayout({
                             </div>
                         </div>
                         <div className="flex items-center gap-3">
+                            <ThemeToggle initialTheme={user?.theme} />
                             {actions && (
                                 <div className="hidden md:flex md:items-center md:gap-2">
                                     {actions}
@@ -364,7 +390,7 @@ export default function AdminLayout({
                             )}
                             <Link
                                 href={ensureRoute('profile.edit', '/profile')}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-sm font-semibold text-white transition hover:border-emerald-400 hover:text-emerald-200"
+                                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-sm font-semibold text-white shadow-lg shadow-black/20 backdrop-blur-xl transition hover:border-blue-400/50 hover:text-blue-200"
                                 aria-label="Abrir perfil"
                             >
                                 {userInitials}
@@ -377,22 +403,22 @@ export default function AdminLayout({
                         </div>
                     )}
                     {actions && (
-                        <div className="border-t border-slate-900/60 px-4 py-3 md:hidden">
+                        <div className="border-t border-white/10 px-4 py-3 md:hidden">
                             <div className="flex flex-wrap gap-2">{actions}</div>
                         </div>
                     )}
                 </header>
 
-                <main className="flex-1 px-4 pb-24 pt-6 md:px-10 md:pb-12">
-                    <div className="mx-auto w-full max-w-5xl space-y-6">
+                <main id="main-content" className="flex-1 px-3 pb-[calc(var(--safe-bottom)+7rem)] pt-4 sm:px-4 md:px-10 md:pb-12 md:pt-6">
+                    <div className="mx-auto w-full max-w-5xl space-y-4 md:space-y-6">
                         {children}
                     </div>
                 </main>
             </div>
 
-            <nav className="fixed inset-x-0 bottom-4 z-40 flex justify-center px-4 md:hidden">
-                <div className="flex w-full max-w-md items-center gap-1 rounded-2xl border border-slate-800 bg-slate-900/90 p-1 shadow-2xl shadow-black/40 backdrop-blur">
-                    {items.map((item) => {
+            <nav className="safari-bottom-nav fixed bottom-[calc(var(--safe-bottom)+0.75rem)] z-40 flex justify-center md:hidden">
+                <div className="ios-tab-bar glass-panel flex w-full max-w-md items-center gap-1 rounded-[2rem] p-1.5">
+                    {mobileItems.map((item) => {
                         const isActive = resolveIsActive(item);
                         const Icon = item.icon;
 
@@ -401,9 +427,9 @@ export default function AdminLayout({
                                 key={item.name}
                                 href={item.href}
                                 className={clsx(
-                                    'flex flex-1 flex-col items-center gap-1 rounded-xl px-3 py-2 text-xs font-medium transition-colors',
+                                    'flex flex-1 flex-col items-center gap-1 rounded-[1.5rem] px-2 py-2 text-[0.68rem] font-medium transition-colors',
                                     isActive
-                                        ? 'bg-emerald-500/10 text-emerald-200'
+                                        ? 'bg-blue-500/20 text-blue-200'
                                         : 'text-slate-400 hover:text-slate-100',
                                 )}
                             >
@@ -411,11 +437,11 @@ export default function AdminLayout({
                                     className={clsx(
                                         'h-5 w-5',
                                         isActive
-                                            ? 'text-emerald-400'
+                                            ? 'text-blue-400'
                                             : 'text-slate-400 group-hover:text-slate-200',
                                     )}
                                 />
-                                <span>{item.name}</span>
+                                <span>{item.mobileName ?? item.name}</span>
                             </Link>
                         );
                     })}

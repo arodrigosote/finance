@@ -44,7 +44,7 @@ export default function Edit({ transaction, catalogs, meta }) {
                 secondaryAction={(
                     <Link
                         href={route('admin.transactions.show', transaction.id)}
-                        className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
+                        className="inline-flex items-center justify-center bubble-button px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-500"
                     >
                         Cancelar
                     </Link>

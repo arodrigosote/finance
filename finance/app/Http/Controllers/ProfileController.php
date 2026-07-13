@@ -40,6 +40,17 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
+    public function updateTheme(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'theme' => ['required', 'in:light,dark'],
+        ]);
+
+        $request->user()->update($validated);
+
+        return Redirect::back();
+    }
+
     /**
      * Delete the user's account.
      */

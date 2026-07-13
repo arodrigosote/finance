@@ -50,7 +50,7 @@ export default function Show({ transaction, meta }) {
                 <div className="flex items-center gap-2">
                     <Link
                         href={route('admin.transactions.edit', transaction.id)}
-                        className="inline-flex items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-200 transition hover:border-slate-500"
+                        className="inline-flex items-center bubble-button px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-200 transition hover:border-slate-500"
                     >
                         Editar
                     </Link>
@@ -73,7 +73,7 @@ export default function Show({ transaction, meta }) {
             <Head title={`Movimiento · ${transaction.description ?? transaction.id}`} />
 
             <section className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                <article className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5">
+                <article className="glass-panel-soft rounded-[2rem] p-5">
                     <div className="flex items-center justify-between">
                         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
                             Movimiento
@@ -94,7 +94,7 @@ export default function Show({ transaction, meta }) {
                         Registrado el {new Date(transaction.booked_at).toLocaleDateString('es-MX', { dateStyle: 'long' })}
                     </p>
                 </article>
-                <article className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5">
+                <article className="glass-panel-soft rounded-[2rem] p-5">
                     <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
                         Monto
                     </h2>
@@ -107,7 +107,7 @@ export default function Show({ transaction, meta }) {
                         <p>Publicado: {formatDateTime(transaction.posted_at)}</p>
                     </div>
                 </article>
-                <article className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5">
+                <article className="glass-panel-soft rounded-[2rem] p-5">
                     <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
                         Cuenta y categoría
                     </h2>
@@ -135,7 +135,7 @@ export default function Show({ transaction, meta }) {
             </section>
 
             <section className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                <article className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5">
+                <article className="glass-panel-soft rounded-[2rem] p-5">
                     <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
                         Etiquetas asociadas
                     </h3>
@@ -154,7 +154,7 @@ export default function Show({ transaction, meta }) {
                         <p className="mt-3 text-sm text-slate-500">Sin etiquetas registradas.</p>
                     )}
                 </article>
-                <article className="rounded-2xl border border-slate-800/70 bg-slate-900/70 p-5">
+                <article className="glass-panel-soft rounded-[2rem] p-5">
                     <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
                         Notas
                     </h3>

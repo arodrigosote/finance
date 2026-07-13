@@ -59,7 +59,7 @@ export default function TransactionForm({
                     </label>
                     <input
                         type="text"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.description}
                         onChange={(event) => setData('description', event.target.value)}
                         placeholder="Ej. Compra supermercado semanal"
@@ -75,7 +75,7 @@ export default function TransactionForm({
                             Tipo
                         </label>
                         <select
-                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                            className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                             value={data.type}
                             onChange={(event) => setData('type', event.target.value)}
                         >
@@ -94,7 +94,7 @@ export default function TransactionForm({
                             Estado
                         </label>
                         <select
-                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                            className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                             value={data.status}
                             onChange={(event) => setData('status', event.target.value)}
                         >
@@ -114,7 +114,7 @@ export default function TransactionForm({
                         Cuenta origen
                     </label>
                     <select
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.financial_account_id}
                         onChange={(event) => setData('financial_account_id', event.target.value)}
                         required
@@ -138,7 +138,7 @@ export default function TransactionForm({
                         type="number"
                         step="0.01"
                         inputMode="decimal"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.amount}
                         onChange={(event) => setData('amount', event.target.value)}
                         placeholder={formattedAmountPlaceholder}
@@ -154,7 +154,7 @@ export default function TransactionForm({
                     </label>
                     <input
                         type="date"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={isoToDateInput(data.booked_at)}
                         onChange={(event) => setData('booked_at', event.target.value)}
                         required
@@ -169,7 +169,7 @@ export default function TransactionForm({
                     </label>
                     <input
                         type="date"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={isoToDateInput(data.posted_at)}
                         onChange={(event) => setData('posted_at', event.target.value)}
                     />
@@ -186,7 +186,7 @@ export default function TransactionForm({
                             Cuenta destino
                         </label>
                         <select
-                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                            className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                             value={data.transfer_account_id}
                             onChange={(event) => setData('transfer_account_id', event.target.value)}
                         >
@@ -209,7 +209,7 @@ export default function TransactionForm({
                             Categoría principal
                         </label>
                         <select
-                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                            className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                             value={data.primary_category_id ?? ''}
                             onChange={(event) => setData('primary_category_id', event.target.value)}
                         >
@@ -231,7 +231,7 @@ export default function TransactionForm({
                         Comercio / contraparte
                     </label>
                     <select
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.merchant_id ?? ''}
                         onChange={(event) => setData('merchant_id', event.target.value)}
                     >
@@ -255,7 +255,7 @@ export default function TransactionForm({
                     </label>
                     <select
                         multiple
-                        className="h-32 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="h-32 w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.tags ?? []}
                         onChange={handleTagSelection}
                     >
@@ -275,7 +275,7 @@ export default function TransactionForm({
                     </label>
                     <textarea
                         rows={5}
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400 focus:outline-none"
                         value={data.notes ?? ''}
                         onChange={(event) => setData('notes', event.target.value)}
                         placeholder="Agrega contexto, recordatorios o enlaces a comprobantes."
@@ -286,7 +286,7 @@ export default function TransactionForm({
                 </div>
             </section>
 
-            <section className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3 text-sm text-slate-300">
+            <section className="flex items-center justify-between glass-panel-soft rounded-2xl px-4 py-3 text-sm text-slate-300">
                 <label className="inline-flex items-center gap-2">
                     <input
                         type="checkbox"

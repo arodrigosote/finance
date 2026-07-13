@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\RecurringTransactionController;
+use App\Http\Controllers\Admin\SavingsController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -25,6 +26,7 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'edit')->name('edit');
         Route::patch('/', 'update')->name('update');
+        Route::patch('/theme', 'updateTheme')->name('theme.update');
         Route::delete('/', 'destroy')->name('destroy');
     });
 
@@ -32,6 +34,9 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+        Route::get('savings', [SavingsController::class, 'index'])->name('savings.index');
+        Route::post('savings/goals', [SavingsController::class, 'storeGoal'])->name('savings.goals.store');
+        Route::post('savings/accounts', [SavingsController::class, 'storeAccount'])->name('savings.accounts.store');
         Route::resource('transactions', TransactionController::class);
         Route::resource('subscriptions', RecurringTransactionController::class)
             ->only(['index', 'store']);

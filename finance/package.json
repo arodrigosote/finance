@@ -23,6 +23,7 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "prop-types": "^15.8.1"
+        "prop-types": "^15.8.1",
+        "recharts": "^3.9.2"
     }
 }

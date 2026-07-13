@@ -38,7 +38,7 @@ export default function CategoryForm({
                     </label>
                     <input
                         type="text"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.name}
                         onChange={(event) => setData('name', event.target.value)}
                         placeholder="Ej. Supermercado"
@@ -51,7 +51,7 @@ export default function CategoryForm({
                         Tipo
                     </label>
                     <select
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.type}
                         onChange={(event) => setData('type', event.target.value)}
                         required
@@ -72,7 +72,7 @@ export default function CategoryForm({
                         Categoría padre
                     </label>
                     <select
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.parent_id}
                         onChange={(event) => setData('parent_id', event.target.value)}
                     >
@@ -92,7 +92,7 @@ export default function CategoryForm({
                     </label>
                     <input
                         type="text"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.color}
                         onChange={(event) => setData('color', event.target.value)}
                         placeholder="#22c55e"
@@ -126,7 +126,7 @@ export default function CategoryForm({
                     <input
                         type="number"
                         min="0"
-                        className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
+                        className="w-full mobile-field px-3 py-2 text-sm text-white focus:border-emerald-400 focus:outline-none"
                         value={data.display_order}
                         onChange={(event) => setData('display_order', event.target.value)}
                         placeholder="0"
